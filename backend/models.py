@@ -1,12 +1,33 @@
 from django.db import models
 
-# Create your models here.
-class Post(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField(blank=True)
-    photo = models.URLField(blank=True)
-    location = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+class Users(models.Model):#OK
+    user_id = models.IntegerField(db_column='id', unique=True, blank=True, null=False, primary_key=True)
+    user = models.TextField(blank=True, null=False)
+    password = models.TextField(blank=True, null=False)
+    email = models.TextField(blank=True, null=False)
+    groups = models.TextField(blank=True, null=False)
+    region = models.TextField(blank=True, null=False)
+    record = models.TextField(blank=True, null=False)
+    description = models.TextField(blank=True, null=False)
+    setting = models.TextField(blank=True, null=False)
+    class Meta:
+        db_table = 'users'
 
     def __str__(self):
-        return self.title
+        return self.user
+
+class Product(models.Model):
+    id = models.IntegerField(db_column='id', unique=True, blank=True, null=False, primary_key=True)
+    name = models.TextField(blank=True)
+    price = models.IntegerField(blank=True)
+    amount = models.IntegerField(blank=True)
+    hot = models.IntegerField(blank=True)
+    time = models.TextField(blank=True)
+    owner = models.TextField(blank=True)
+    group = models.TextField(blank=True)
+    url = models.TextField(blank=True)
+    class Meta:
+        db_table = 'product'
+
+    def __str__(self):
+        return self.name
