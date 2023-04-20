@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls import include, re_path
 
 
-from trips.views import hello_world, home, post_detail
+from backend.views import hello_world, home, post_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
