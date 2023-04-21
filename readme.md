@@ -18,6 +18,21 @@
 - 前端
   - 安裝 node_modules `~/front $ yarn`
 
+## 畫面
+
+- 登入/註冊
+  ![image](readme/1.png)
+- 瀏覽頁面
+  ![image](readme/2.png)
+- 遊戲頁面
+  ![image](readme/3.png)
+- 後台管理
+  ![image](readme/4.png)
+
+## 線上 demo
+
+https://pseuder.pythonanywhere.com
+
 ## Troubleshooting
 
 - ModuleNotFoundError: No module named ‘api.apps’  
