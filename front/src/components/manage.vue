@@ -69,8 +69,8 @@
               placeholder="請選擇種類"
               class="add-form-input"
             >
-              <el-option label="VT" value="VT"></el-option>
-              <el-option label="APEX" value="APEX"></el-option>
+              <el-option label="生活" value="生活"></el-option>
+              <el-option label="遊戲" value="遊戲"></el-option>
               <el-option label="手機" value="手機"></el-option>
               <el-option label="食物" value="食物"></el-option>
               <el-option label="口罩" value="口罩"></el-option>

@@ -10,6 +10,14 @@
 - 資料庫：db.sqlite3
 - 網站伺服器：PythonAnywhere
 
+## 使用
+
+- 後端
+  - 安裝 python 套件 ` ~ $ pip install -r requirements.txt`
+  - 建立資料庫 `~ $ python manage.py migrate`
+- 前端
+  - 安裝 node_modules `~/front $ yarn`
+
 ## Troubleshooting
 
 - ModuleNotFoundError: No module named ‘api.apps’  

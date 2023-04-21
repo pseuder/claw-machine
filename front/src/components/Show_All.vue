@@ -1,26 +1,19 @@
 <style scoped>
-.memeber_button {
-  position: relative;
-  top: 50px;
-  right: -700px;
-}
 .search_div {
   width: 40%;
   margin: 0 auto;
   display: flex;
-  position: absolute;
-  top: 130px;
-  left: 800px;
+  clear: both;
 }
 .tabs_div {
   position: relative;
   left: 60px;
-  top: 130px;
+  top: 100px;
   width: 200px;
 }
 .product_div {
   position: absolute;
-  top: 180px;
+  top: 150px;
   left: 400px;
   width: 70%;
 }
@@ -37,93 +30,89 @@
 <template>
   <div name="full">
     <!-- all page -->
-
-    <span style="position: absolute; top: 30px; right: 200px"
-      ><i class="el-icon-coin"></i>目前餘額：{{ user_money }}$</span
+    <div
+      style=" width: 400px;    float: right;    gap: 60px;    display: flex;"
     >
-    <el-popover
-      placement="bottom"
-      trigger="click"
-      width="300"
-      title="信用卡儲值"
-      ref="money_pop"
-    >
-      <br />
-      <el-form :model="recharge" label-width="80px">
-        <el-form-item prop="number" label="卡號">
-          <el-input
-            v-model="recharge.number"
-            style="width: 200px; display: block"
-            placeholder="請輸入卡號"
-            type="text"
-          >
-            <i class="el-icon-bank-card" slot="prefix"></i>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="digtal3" label="後三碼">
-          <el-input
-            v-model="recharge.digtal3"
-            style="width: 200px; display: block"
-            placeholder="請輸入後三碼"
-          ></el-input>
-        </el-form-item>
-        <div style="left: 20px; position: relative">
-          <el-row>
-            <el-col :span="7"
-              ><el-radio v-model="recharge.money" label="50" border
-                >50</el-radio
-              ></el-col
+      <span><i class="el-icon-coin"></i>目前餘額：{{ user_money }}$</span>
+      <el-popover
+        placement="bottom"
+        trigger="click"
+        width="300"
+        title="信用卡儲值"
+        ref="money_pop"
+      >
+        <br />
+        <el-form :model="recharge" label-width="80px">
+          <el-form-item prop="number" label="卡號">
+            <el-input
+              v-model="recharge.number"
+              style="width: 200px; display: block"
+              placeholder="請輸入卡號"
+              type="text"
             >
-            <el-col :span="7"
-              ><el-radio v-model="recharge.money" label="100" border
-                >100</el-radio
-              ></el-col
+              <i class="el-icon-bank-card" slot="prefix"></i>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="digtal3" label="後三碼">
+            <el-input
+              v-model="recharge.digtal3"
+              style="width: 200px; display: block"
+              placeholder="請輸入後三碼"
+            ></el-input>
+          </el-form-item>
+          <div style="left: 20px; position: relative">
+            <el-row>
+              <el-col :span="7"
+                ><el-radio v-model="recharge.money" label="50" border
+                  >50</el-radio
+                ></el-col
+              >
+              <el-col :span="7"
+                ><el-radio v-model="recharge.money" label="100" border
+                  >100</el-radio
+                ></el-col
+              >
+              <el-col :span="7"
+                ><el-radio v-model="recharge.money" label="200" border
+                  >200</el-radio
+                ></el-col
+              >
+            </el-row>
+            <el-row>
+              <el-col :span="7" style="margin-top: 10px"
+                ><el-radio v-model="recharge.money" label="500" border
+                  >500</el-radio
+                ></el-col
+              >
+              <el-col :span="7" style="margin-top: 10px"
+                ><el-radio v-model="recharge.money" label="750" border
+                  >750</el-radio
+                ></el-col
+              >
+              <el-col :span="7" style="margin-top: 10px"
+                ><el-radio v-model="recharge.money" label="1000" border
+                  >1000</el-radio
+                ></el-col
+              >
+            </el-row>
+          </div>
+          <div style="text-align: right; margin-top: 20px">
+            <el-button
+              size="mini"
+              type="text"
+              @click="$refs['money_pop'].doClose()"
+              >取消</el-button
             >
-            <el-col :span="7"
-              ><el-radio v-model="recharge.money" label="200" border
-                >200</el-radio
-              ></el-col
+            <el-button type="primary" size="mini" @click="set_user_money"
+              >确定</el-button
             >
-          </el-row>
-          <el-row>
-            <el-col :span="7" style="margin-top: 10px"
-              ><el-radio v-model="recharge.money" label="500" border
-                >500</el-radio
-              ></el-col
-            >
-            <el-col :span="7" style="margin-top: 10px"
-              ><el-radio v-model="recharge.money" label="750" border
-                >750</el-radio
-              ></el-col
-            >
-            <el-col :span="7" style="margin-top: 10px"
-              ><el-radio v-model="recharge.money" label="1000" border
-                >1000</el-radio
-              ></el-col
-            >
-          </el-row>
-        </div>
-        <div style="text-align: right; margin-top: 20px">
-          <el-button
-            size="mini"
-            type="text"
-            @click="$refs['money_pop'].doClose()"
-            >取消</el-button
-          >
-          <el-button type="primary" size="mini" @click="set_user_money"
-            >确定</el-button
-          >
-        </div>
-      </el-form>
-      <el-link
-        type="primary"
-        slot="reference"
-        style="position: absolute; top: 30px; right: 100px"
-        >儲值<i class="el-icon-circle-plus"></i
-      ></el-link>
-    </el-popover>
+          </div>
+        </el-form>
+        <el-link type="primary" slot="reference"
+          >儲值<i class="el-icon-circle-plus"></i
+        ></el-link>
+      </el-popover>
 
-    <div>
       <!-- member button-->
       <el-popover trigger="hover" width="200" placement="bottom">
         <div>
@@ -155,8 +144,7 @@
       </el-popover>
     </div>
 
-    <div class="search_div">
-      <!-- search -->
+    <!-- <div class="search_div">
       <el-input
         style="width: 300px"
         v-model="search_text"
@@ -168,7 +156,7 @@
         circle
         @click="search"
       ></el-button>
-    </div>
+    </div> -->
 
     <div class="tabs_div">
       <!-- 分類表 -->
@@ -184,10 +172,10 @@
           <i class="el-icon-position"></i>
           <span slot="title">全部</span>
         </el-menu-item>
-        <el-menu-item index="VT">
+        <el-menu-item index="生活">
           <i class="el-icon-position"></i> <span slot="title">生活</span>
         </el-menu-item>
-        <el-menu-item index="APEX">
+        <el-menu-item index="遊戲">
           <i class="el-icon-position"></i> <span slot="title">遊戲</span>
         </el-menu-item>
         <el-menu-item index="手機">
@@ -215,7 +203,7 @@
           <template slot-scope="scope">
             <img
               :src="scope.row.url"
-              style="cursor: pointer; max-width: 300px"
+              style="cursor: pointer; max-width: 150px"
               @click="cell_click(scope.row)"
             />
             <p>{{ scope.row.name }}</p>
@@ -297,14 +285,14 @@ export default {
         case '全部':
           this.table_data = this.product_data
           break
-        case 'VT':
+        case '生活':
           this.table_data = this.product_data.filter(item => {
-            return item['group'] == 'VT'
+            return item['group'] == '生活'
           })
           break
-        case 'APEX':
+        case '遊戲':
           this.table_data = this.product_data.filter(item => {
-            return item['group'] == 'APEX'
+            return item['group'] == '遊戲'
           })
           break
         case '手機':
