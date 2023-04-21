@@ -1,25 +1,28 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
-import router from './router'
-
+import App from '@/App.vue'
+import router from '@/router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import qs from 'qs'
 
-// 应用axios插件
-Vue.use(VueAxios, axios)
-// 配置后端路由
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
-// 将axios挂在全局上
-Vue.prototype.$axios = axios
+// 配全局属性配置，在任意组件内可以使用this.$qs獲取qs对象 (axios.post需要)
+Vue.prototype.$qs = qs
 
 Vue.config.productionTip = false
+Vue.use(VueAxios, axios)
+axios.defaults.baseURL = '/api'
+Vue.use(ElementUI)
+Vue.config.devtools = true
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+router.beforeEach((to, from, next) => {
+  next()
 })
+
+const vue = new Vue({
+  router,
+  render: h => h(App)
+})
+
+vue.$mount('#app')
