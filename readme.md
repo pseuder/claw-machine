@@ -15,8 +15,10 @@
 - 後端
   - 安裝 python 套件 ` ~ $ pip install -r requirements.txt`
   - 建立資料庫 `~ $ python manage.py migrate`
-- 前端
+  - 開啟本地伺服器 `~ $ python manage.py runserver`
+- 前端建構
   - 安裝 node_modules `~/front $ yarn`
+  - 修改後建構 `~/front $ build`
 
 ## 畫面
 
