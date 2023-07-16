@@ -1,15 +1,3 @@
-# claw-machine 線上夾娃娃機
-
-## 網站架構
-
-- 前端框架：vue2
-- 後端: python
-- 應用框架:Django
-- 3D 模型：three.js
-- 物理引擎：cannon.js
-- 資料庫：db.sqlite3
-- 網站伺服器：PythonAnywhere
-
 ## 使用
 
 - 後端
@@ -19,21 +7,6 @@
 - 前端建構
   - 安裝 node_modules `~/front $ yarn`
   - 修改後建構 `~/front $ build`
-
-## 畫面
-
-- 登入/註冊
-  ![image](readme/1.png)
-- 瀏覽頁面
-  ![image](readme/2.png)
-- 遊戲頁面
-  ![image](readme/3.png)
-- 後台管理
-  ![image](readme/4.png)
-
-## 線上 demo
-
-https://pseuder.pythonanywhere.com
 
 ## Troubleshooting
 
