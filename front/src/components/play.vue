@@ -1,201 +1,399 @@
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-.title {
-  text-align: center;
-  font-size: 30px;
+<style scoped>
+.play-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  display: flex;
 }
-.caption {
-  text-align: left;
+
+.header-bar {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 100;
+}
+
+.balance-info {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.balance-info i {
+  margin-right: 8px;
+  color: #ffd04b;
+  font-size: 18px;
+}
+
+.recharge-link {
+  font-weight: 600;
+  font-size: 15px;
+  color: white !important;
+}
+
+.recharge-link i {
+  margin-left: 5px;
+}
+
+.sidebar-panel {
+  position: fixed;
+  width: fit-content;
+  top: 20px;
+  left: 100px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.instructions-panel {
+  margin-top: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+}
+
+.instructions-title {
   font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.input {
-  width: 400px;
-  border-color: black;
+
+.instruction-item {
+  padding: 15px 25px;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
 }
-.button {
-  font-size: 30px;
-  width: 400px;
-  background-color: #439eff;
-  color: black;
+
+.start-game-button {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: #ffffff !important;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.start-game-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.prize-button {
+  position: absolute;
+  top: 120px;
+  right: 100px;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.prize-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.prize-dialog :deep(.el-dialog) {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.prize-dialog :deep(.el-dialog__header) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.prize-dialog :deep(.el-dialog__title) {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.prize-content {
+  display: flex;
+  gap: 30px;
+}
+
+.form-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.form-section :deep(.el-form-item__label) {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-section :deep(.el-input__wrapper) {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.prize-section {
+  flex: 1;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.prize-item {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+.prize-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.prize-checkbox {
+  margin-top: 10px;
+}
+
+.dialog-footer {
+  padding: 20px;
+  text-align: right;
+  border-top: 1px solid #e8e8e8;
+}
+
+.dialog-footer .el-button {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+}
+
+.recharge-form :deep(.el-form-item__label) {
+  font-weight: 600;
+  color: #333;
+}
+
+.recharge-form :deep(.el-input__wrapper) {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.recharge-options {
+  margin-left: 20px;
+}
+
+.recharge-options :deep(.el-radio.is-bordered) {
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.recharge-options :deep(.el-radio.is-bordered.is-checked) {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
 }
 </style>
 
 <template>
-  <div>
-    <div style="position: absolute;top: 20px;left: 100px; ">
+  <div class="play-container">
+    <!-- 左側面板 -->
+    <div class="sidebar-panel">
       <el-button
-        style="font-size: 30px;"
+        class="back-button"
         icon="el-icon-back"
         type="primary"
         @click="goback"
       ></el-button>
-      <div style="margin-top:50px; border:dotted">
-        <oi>
-          <br /><br /><br /><br />
-          <li style="padding:0px 25px;">按下開始遊戲按鈕</li>
-          <br /><br /><br />
-          <li>上下左右滑鼠操控</li>
-          <br /><br /><br />
-          <li>按空白鍵抓取物品</li>
-          <br /><br /><br />
-          <div>
-            <el-button @click="start_game" v-show="play_lock"
-              >開始遊戲</el-button
-            >
-          </div>
-          <br /><br />
-        </oi>
+
+      <!-- 右上角餘額與儲值 -->
+      <div class="balance-info">
+        <i class="el-icon-coin"></i>目前餘額：{{ user_money }}$
       </div>
-    </div>
 
-    <span style="position:absolute; top:30px; right:200px;"
-      ><i class="el-icon-coin"></i>目前餘額：{{ user_money }}$</span
-    >
-    <el-popover
-      placement="bottom"
-      trigger="click"
-      width="300"
-      title="信用卡儲值"
-      ref="money_pop"
-    >
-      <br />
-      <el-form :model="recharge" label-width="80px">
-        <el-form-item prop="number" label="卡號">
-          <el-input
-            v-model="recharge.number"
-            style="width:200px; display: block;"
-            placeholder="請輸入卡號"
-            type="text"
-          >
-            <i class="el-icon-bank-card" slot="prefix"></i>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="digtal3" label="後三碼">
-          <el-input
-            v-model="recharge.digtal3"
-            style="width:200px; display: block;"
-            placeholder="請輸入後三碼"
-          ></el-input>
-        </el-form-item>
-        <div style="left: 20px; position: relative;">
-          <el-row>
-            <el-col :span="7"
-              ><el-radio v-model="recharge.money" label="50" border
-                >50</el-radio
-              ></el-col
-            >
-            <el-col :span="7"
-              ><el-radio v-model="recharge.money" label="100" border
-                >100</el-radio
-              ></el-col
-            >
-            <el-col :span="7"
-              ><el-radio v-model="recharge.money" label="200" border
-                >200</el-radio
-              ></el-col
-            >
-          </el-row>
-          <el-row>
-            <el-col :span="7" style="margin-top: 10px;"
-              ><el-radio v-model="recharge.money" label="500" border
-                >500</el-radio
-              ></el-col
-            >
-            <el-col :span="7" style="margin-top: 10px;"
-              ><el-radio v-model="recharge.money" label="750" border
-                >750</el-radio
-              ></el-col
-            >
-            <el-col :span="7" style="margin-top: 10px;"
-              ><el-radio v-model="recharge.money" label="1000" border
-                >1000</el-radio
-              ></el-col
-            >
-          </el-row>
-        </div>
-        <div style="text-align: right; margin-top: 20px">
-          <el-button
-            size="mini"
-            type="text"
-            @click="$refs['money_pop'].doClose()"
-            >取消</el-button
-          >
-          <el-button type="primary" size="mini" @click="set_user_money"
-            >确定</el-button
-          >
-        </div>
-      </el-form>
-      <el-link
-        type="primary"
-        slot="reference"
-        style="position:absolute; top:30px; right:100px;"
-        >儲值<i class="el-icon-circle-plus"></i
-      ></el-link>
-    </el-popover>
+      <div class="balance-info">
+        <i class="el-icon-coin"></i
+        ><el-popover
+          placement="bottom"
+          trigger="click"
+          width="350"
+          title="儲值"
+          ref="money_pop"
+        >
+          <el-link class="recharge-link" slot="reference">
+            儲值<i class="el-icon-circle-plus"></i>
+          </el-link>
 
-    <div style="position: absolute;top: 120px;right: 100px;">
-      <el-button
-        style="font-size: 30px;"
+          <div class="recharge-form">
+            <el-form :model="recharge" label-width="80px">
+              <div class="recharge-options">
+                <el-row :gutter="10">
+                  <el-col :span="8">
+                    <el-radio v-model="recharge.money" label="50" border
+                      >50</el-radio
+                    >
+                  </el-col>
+                  <el-col :span="8">
+                    <el-radio v-model="recharge.money" label="100" border
+                      >100</el-radio
+                    >
+                  </el-col>
+                  <el-col :span="8">
+                    <el-radio v-model="recharge.money" label="200" border
+                      >200</el-radio
+                    >
+                  </el-col>
+                </el-row>
+                <el-row :gutter="10" style="margin-top: 10px">
+                  <el-col :span="8">
+                    <el-radio v-model="recharge.money" label="500" border
+                      >500</el-radio
+                    >
+                  </el-col>
+                  <el-col :span="8">
+                    <el-radio v-model="recharge.money" label="750" border
+                      >750</el-radio
+                    >
+                  </el-col>
+                  <el-col :span="8">
+                    <el-radio v-model="recharge.money" label="1000" border
+                      >1000</el-radio
+                    >
+                  </el-col>
+                </el-row>
+              </div>
+              <div style="text-align: right; margin-top: 20px">
+                <el-button size="small" @click="$refs['money_pop'].doClose()"
+                  >取消</el-button
+                >
+                <el-button type="primary" size="small" @click="set_user_money"
+                  >確定</el-button
+                >
+              </div>
+            </el-form>
+          </div>
+        </el-popover>
+      </div>
+
+      <!-- 獎品按鈕 -->
+      <!-- <el-button
+        class="prize-button"
         icon="el-icon-s-cooperation"
         type="primary"
         @click="open_prize_form"
-      ></el-button>
-      <el-dialog title="填寫獎品運送資訊" :visible.sync="prize_form">
-        <div style="display: flex;">
-          <div style="width:50%">
-            <el-form :model="form" label-width="80px">
-              <el-form-item prop="name" label="姓名">
-                <el-input
-                  v-model="form.name"
-                  style="width:200px; display: block;"
-                  placeholder="請輸入姓名"
-                ></el-input>
-              </el-form-item>
-              <el-form-item prop="cellphone" label="手機">
-                <el-input
-                  v-model.number="form.cellphone"
-                  style="width:200px; display: block;"
-                  placeholder="請輸入手機"
-                ></el-input>
-              </el-form-item>
-              <el-form-item prop="adddress" label="地址">
-                <el-input
-                  v-model="form.adddress"
-                  style="width:300px; display: block;"
-                  placeholder="請輸入地址"
-                ></el-input>
-              </el-form-item>
-            </el-form>
-          </div>
+      ></el-button> -->
 
-          <div style="width:50%">
-            <div
-              v-for="(item, index) in product_url"
-              style="float: left; margin-top: 20px;"
-            >
-              <div>
-                <img :src="item" style="width:150px; height:150px;" />
-              </div>
-              <div>
-                <el-checkbox v-model="prize_selection[index]" label="">{{
-                  index
-                }}</el-checkbox>
-              </div>
+      <div class="instructions-panel">
+        <div class="instructions-title">遊戲說明</div>
+        <ol style="padding-left: 20px; margin: 0">
+          <li class="instruction-item">按下開始遊戲按鈕</li>
+          <li class="instruction-item">上下左右鍵操控</li>
+          <li class="instruction-item">滑鼠滾輪拉近拉遠</li>
+          <li class="instruction-item">按空白鍵抓取物品</li>
+        </ol>
+        <div v-show="play_lock">
+          <el-button class="start-game-button" @click="start_game">
+            開始遊戲
+          </el-button>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="three"></canvas>
+
+    <!-- 獎品對話框 -->
+    <el-dialog
+      title="填寫獎品運送資訊"
+      :visible.sync="prize_form"
+      class="prize-dialog"
+      width="800px"
+    >
+      <div class="prize-content">
+        <div class="form-section">
+          <el-form :model="form" label-width="80px">
+            <el-form-item prop="name" label="姓名">
+              <el-input v-model="form.name" placeholder="請輸入姓名"></el-input>
+            </el-form-item>
+            <el-form-item prop="cellphone" label="手機">
+              <el-input
+                v-model.number="form.cellphone"
+                placeholder="請輸入手機"
+              ></el-input>
+            </el-form-item>
+            <el-form-item prop="adddress" label="地址">
+              <el-input
+                v-model="form.adddress"
+                placeholder="請輸入地址"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+
+        <div class="prize-section">
+          <div
+            v-for="(item, index) in product_url"
+            :key="index"
+            class="prize-item"
+          >
+            <img :src="item" class="prize-image" />
+            <div class="prize-checkbox">
+              <el-checkbox v-model="prize_selection[index]">
+                {{ index }}
+              </el-checkbox>
             </div>
           </div>
         </div>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="warning" @click="del_prize" plain>丟棄</el-button>
-          <el-button type="primary" @click="send_prize" plain>確定</el-button>
-          <el-button type="danger" @click="prize_form = false" plain
-            >取消</el-button
-          >
-        </div>
-      </el-dialog>
-    </div>
-
-    <canvas id="mainCanvas"></canvas>
-    <canvas style="margin:55px;" id="three"></canvas>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="warning" @click="del_prize">丟棄</el-button>
+        <el-button type="primary" @click="send_prize">確定</el-button>
+        <el-button type="danger" @click="prize_form = false">取消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -206,7 +404,7 @@ import * as TControls from 'three-trackballcontrols-ts'
 
 export default {
   name: 'play',
-  data: function() {
+  data: function () {
     return {
       user: '',
       play_info: [],
@@ -215,7 +413,7 @@ export default {
       form: {
         name: '',
         cellphone: '',
-        adddress: ''
+        adddress: '',
       },
       prize_selection: [],
       index_url_map: [],
@@ -224,9 +422,9 @@ export default {
       recharge: {
         number: '',
         digtal3: '',
-        money: ''
+        money: '',
       },
-      play_lock: true
+      play_lock: true,
     }
   },
   created() {
@@ -235,20 +433,20 @@ export default {
 
     this.axios
       .post('/get_user_prize', {
-        user: this.user
+        user: this.user,
       })
-      .then(response => {
+      .then((response) => {
         if (response.data != '') this.prize_info = JSON.parse(response.data)
         else this.prize_info = []
-        this.axios.post('/get_all_product_url').then(response => {
+        this.axios.post('/get_all_product_url').then((response) => {
           for (let i in response.data) {
             this.index_url_map[i] = response.data[i]
           }
         })
       })
 
-    this.axios.post('/get_all_user', {}).then(response => {
-      let db_user = response.data.filter(item => {
+    this.axios.post('/get_all_user', {}).then((response) => {
+      let db_user = response.data.filter((item) => {
         return item['user'] == this.user
       })
       this.user_money = db_user[0]['setting']
@@ -261,9 +459,9 @@ export default {
     open_prize_form() {
       this.axios
         .post('/get_user_prize', {
-          user: this.user
+          user: this.user,
         })
-        .then(response => {
+        .then((response) => {
           if (response.data != '') this.prize_info = JSON.parse(response.data)
           else this.prize_info = []
 
@@ -292,9 +490,9 @@ export default {
       this.axios
         .post('/set_user_money', {
           user: this.user,
-          money: this.recharge.money
+          money: this.recharge.money,
         })
-        .then(response => {
+        .then((response) => {
           location.reload()
           this.$message('加值成功')
         })
@@ -306,9 +504,9 @@ export default {
       this.axios
         .post('/del_user_prize', {
           user: this.user,
-          prize_info: this.prize_selection
+          prize_info: this.prize_selection,
         })
-        .then(response => {
+        .then((response) => {
           this.$message('刪除成功')
           location.reload()
         })
@@ -400,7 +598,7 @@ export default {
       )
       const bgmaterial = new THREE.MeshBasicMaterial({
         map: bgTexture,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       const bgplane = new THREE.Mesh(bggeometry, bgmaterial)
       bgplane.position.z = -2150
@@ -430,11 +628,11 @@ export default {
 
       const bggeometry5 = new THREE.PlaneGeometry(4300, 4300)
       const bgTexture5 = new THREE.TextureLoader().load(
-        require('@/assets/ground.jpg')
+        require('@/assets/UV_Grid_Sm.jpg')
       )
       const bgmaterial5 = new THREE.MeshBasicMaterial({
         map: bgTexture5,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       const bgplane5 = new THREE.Mesh(bggeometry5, bgmaterial5)
       bgplane5.position.y = -1250
@@ -443,11 +641,11 @@ export default {
 
       const bggeometry6 = new THREE.PlaneGeometry(4300, 4300)
       const bgTexture6 = new THREE.TextureLoader().load(
-        require('@/assets/ceiling.jpg')
+        require('@/assets/UV_Grid_Sm.jpg')
       )
       const bgmaterial6 = new THREE.MeshBasicMaterial({
         map: bgTexture6,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       const bgplane6 = new THREE.Mesh(bggeometry6, bgmaterial6)
       bgplane6.position.y = 1250
@@ -460,7 +658,7 @@ export default {
       var material = new THREE.MeshPhongMaterial({
         transparent: true,
         opacity: 0.4,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       var plane = new THREE.Mesh(geometry, material)
       plane.rotation.x = (-90 * Math.PI) / 180
@@ -471,7 +669,7 @@ export default {
       var material = new THREE.MeshPhongMaterial({
         transparent: true,
         opacity: 0.4,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       var plane = new THREE.Mesh(geometry, material)
       plane.rotation.x = (-90 * Math.PI) / 180
@@ -483,7 +681,7 @@ export default {
       var material = new THREE.MeshPhongMaterial({
         transparent: true,
         opacity: 0.4,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       var plane = new THREE.Mesh(geometry, material)
       plane.rotation.y = (-90 * Math.PI) / 180
@@ -496,7 +694,7 @@ export default {
       var material = new THREE.MeshPhongMaterial({
         transparent: true,
         opacity: 0.4,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       var plane = new THREE.Mesh(geometry, material)
       plane.rotation.y = (90 * Math.PI) / 180
@@ -509,7 +707,7 @@ export default {
       var material = new THREE.MeshPhongMaterial({
         transparent: true,
         opacity: 0.4,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       var plane = new THREE.Mesh(geometry, material)
       plane.position.y += 150
@@ -521,7 +719,7 @@ export default {
       var material = new THREE.MeshPhongMaterial({
         transparent: true,
         opacity: 0.4,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       var plane = new THREE.Mesh(geometry, material)
       plane.position.y += 150
@@ -545,7 +743,7 @@ export default {
       )
       const coinholeMaterial = new THREE.MeshBasicMaterial({
         map: coinholeTexture,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       const coinhole = new THREE.Mesh(coinholeGeometry, coinholeMaterial)
       coinhole.position.x += 94
@@ -560,7 +758,7 @@ export default {
       )
       const coinMaterial = new THREE.MeshBasicMaterial({
         map: coinTexture,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       coin = new THREE.Mesh(coinGeometry, coinMaterial)
       coin.rotation.y = (90 * Math.PI) / 180
@@ -576,7 +774,7 @@ export default {
         require('@/assets/UV_Grid_Sm.jpg')
       )
       var joystickHeadMaterial = new THREE.MeshPhongMaterial({
-        map: joystickHeadTexture
+        map: joystickHeadTexture,
       })
       joystickHead = new THREE.Mesh(joystickHeadgeometry, joystickHeadMaterial)
       joystickHead.position.y += 20
@@ -588,7 +786,7 @@ export default {
         require('@/assets/UV_Grid_Sm.jpg')
       )
       var joystickBodymaterial = new THREE.MeshBasicMaterial({
-        map: joystickBodyTexture
+        map: joystickBodyTexture,
       })
       joystickBody = new THREE.Mesh(joystickBodygeometry, joystickBodymaterial)
       joystickBody.position.y += 10
@@ -676,7 +874,7 @@ export default {
         mass: 0,
         shape: groundShape,
         position: new THREE.Vector3(150, 0, 0),
-        material: rwallCM
+        material: rwallCM,
       })
       rwallBody.quaternion.setFromAxisAngle(
         new CANNON.Vec3(0, 1, 0),
@@ -690,7 +888,7 @@ export default {
         mass: 0,
         shape: groundShape,
         position: new CANNON.Vec3(-150, 0, 0),
-        material: lwallCM
+        material: lwallCM,
       })
       lwallBody.quaternion.setFromAxisAngle(
         new CANNON.Vec3(0, 1, 0),
@@ -704,7 +902,7 @@ export default {
         mass: 0,
         shape: groundShape,
         position: new THREE.Vector3(0, 0, 150),
-        material: fwallCM
+        material: fwallCM,
       })
       fwallBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI)
       world.add(fwallBody)
@@ -715,7 +913,7 @@ export default {
         mass: 0,
         shape: groundShape,
         position: new THREE.Vector3(0, 0, -150),
-        material: bwallCM
+        material: bwallCM,
       })
       world.add(bwallBody)
 
@@ -725,7 +923,7 @@ export default {
         mass: 0,
         shape: groundShape,
         position: new THREE.Vector3(0, -100, 800),
-        material: groundCM
+        material: groundCM,
       })
       groundBody.quaternion.setFromAxisAngle(
         new CANNON.Vec3(1, 0, 0),
@@ -748,7 +946,7 @@ export default {
         mass: 0,
         shape: new CANNON.Box(new CANNON.Vec3(100, 50, 150)),
         position: new THREE.Vector3(50, -45, 0),
-        material: bottCM
+        material: bottCM,
       })
       world.add(bottBody)
 
@@ -767,7 +965,7 @@ export default {
         mass: 0,
         shape: new CANNON.Box(new CANNON.Vec3(50, 50, 105)),
         position: new THREE.Vector3(-100, -45, -40),
-        material: bottCM2
+        material: bottCM2,
       })
       world.add(bottBody2)
 
@@ -786,7 +984,7 @@ export default {
         color: 0xff11ff,
         transparent: true,
         opacity: 0.4,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
       })
       var Baffleplane = new THREE.Mesh(Bafflegeometry, Bafflematerial)
       Baffleplane.rotation.y = (90 * Math.PI) / 180
@@ -802,7 +1000,7 @@ export default {
         mass: 0,
         shape: new CANNON.Box(new CANNON.Vec3(1, 40, 50)),
         position: new THREE.Vector3(-50, 50, 100),
-        material: BafflebottCM
+        material: BafflebottCM,
       })
       world.add(BafflebottBody)
 
@@ -819,7 +1017,7 @@ export default {
         mass: 0,
         shape: new CANNON.Box(new CANNON.Vec3(50, 40, 1)),
         position: new THREE.Vector3(-100, 50, 50),
-        material: BafflebottCM2
+        material: BafflebottCM2,
       })
       world.add(BafflebottBody2)
 
@@ -836,7 +1034,7 @@ export default {
           mass: 5,
           shape: new CANNON.Box(new CANNON.Vec3(22, 22, 22)),
           position: new THREE.Vector3(50 + i * 2, 200 * i + 0, -50 + i * 2),
-          material: cm_array[i]
+          material: cm_array[i],
         })
         world.add(body_array[i])
         // 物品mesh
@@ -854,7 +1052,7 @@ export default {
         mass: 0,
         shape: new CANNON.Box(new CANNON.Vec3(19, 2.5, 2.5)),
         position: new THREE.Vector3(0, 0, 0),
-        material: boxCM
+        material: boxCM,
       })
       world.add(boxBody)
 
@@ -864,7 +1062,7 @@ export default {
         mass: 0,
         shape: new CANNON.Box(new CANNON.Vec3(19, 2.5, 2.5)),
         position: new THREE.Vector3(0, 0, 0),
-        material: boxCM2
+        material: boxCM2,
       })
       world.add(boxBody2)
 
@@ -908,8 +1106,8 @@ export default {
 
       function animate() {
         if (document.getElementById('three') == null) return
-        document.getElementById('three').style.width = '1200px'
-        document.getElementById('three').style.height = '750px'
+        // document.getElementById('three').style.width = '1200px'
+        // document.getElementById('three').style.height = '750px'
 
         world.step(timeStep)
 
@@ -995,7 +1193,7 @@ export default {
             clawMesh2.rotation.z += 0.01
 
             if (clawMesh2.rotation.z > 2) {
-              body_array.forEach(i => {
+              body_array.forEach((i) => {
                 if (
                   i.position.x < clawSystem.position.x + 15 &&
                   i.position.x > clawSystem.position.x - 15 &&
@@ -1031,7 +1229,7 @@ export default {
               clawMesh1.rotation.z = 1.5
               clawMesh2.rotation.z = 1.5
               bingo = undefined
-              setTimeout(function() {
+              setTimeout(function () {
                 mesh_array.forEach((item, index) => {
                   if (item.position.y < -10) {
                     mesh_array.splice(index, 1)
@@ -1048,12 +1246,12 @@ export default {
                         user: that.user,
                         prize_info: JSON.parse(sessionStorage['play_info'])[
                           'id'
-                        ]
+                        ],
                       })
-                      .then(response => {
+                      .then((response) => {
                         that.$message({
                           message: '恭喜獲得獎品',
-                          type: 'success'
+                          type: 'success',
                         })
                       })
                   }
@@ -1105,7 +1303,7 @@ export default {
           if (press_key == 'ArrowRight' /* > */) right = false
         }
       }
-    }
-  }
+    },
+  },
 }
 </script>
