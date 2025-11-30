@@ -12,7 +12,7 @@ Vue.prototype.$qs = qs
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = '/claw_machine/api'
 Vue.use(ElementUI)
 Vue.config.devtools = true
 
@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
 
 const vue = new Vue({
   router,
-  render: h => h(App)
+  render: (h) => h(App),
 })
 
 vue.$mount('#app')

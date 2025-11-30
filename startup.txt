@@ -1,0 +1,8 @@
+ps -fC python3
+
+cd /home/iop890520/claw-machine
+
+source venv/bin/activate
+
+nohup python3 manage.py runserver 0.0.0.0:5005 &
+
