@@ -12,7 +12,9 @@ Vue.prototype.$qs = qs
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
-axios.defaults.baseURL = '/claw_machine/api'
+
+axios.defaults.baseURL = process.env.API_BASE_URL
+
 Vue.use(ElementUI)
 Vue.config.devtools = true
 

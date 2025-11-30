@@ -30,8 +30,8 @@
 
 <template>
   <div>
-    <el-card style="margin:100px auto; width:500px;">
-      <div style="margin:0 auto; width:400px; font-size:20px">
+    <el-card style="margin: 100px auto; width: 500px">
+      <div style="margin: 0 auto; width: 400px; font-size: 20px">
         <br /><br />
         <div class="title">Log into your account</div>
         <br /><br />
@@ -62,9 +62,9 @@
 <script>
 export default {
   name: 'login',
-  data: function() {
+  data: function () {
     return {
-      user: ['', '']
+      user: ['Admin', 'Admin'],
     }
   },
   created() {
@@ -73,7 +73,7 @@ export default {
   mounted() {
     //監聽enter 若按enter則觸發login
     let _this = this
-    document.onkeydown = function(e) {
+    document.onkeydown = function (e) {
       if (_this.$route.name == 'login') {
         let key = window.event.keyCode
         if (key == 13) _this.login()
@@ -86,10 +86,10 @@ export default {
         .get('/login', {
           params: {
             user: JSON.stringify(this.user),
-            mode: 'login'
-          }
+            mode: 'login',
+          },
         })
-        .then(response => {
+        .then((response) => {
           let res = response.data
           if (res.msg == '登入成功!') {
             this.$message({ message: res.msg, type: 'success' })
@@ -104,7 +104,7 @@ export default {
     },
     resetPassword() {
       this.$router.push({ name: 'resetPassword' })
-    }
-  }
+    },
+  },
 }
 </script>
